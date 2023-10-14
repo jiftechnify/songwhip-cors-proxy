@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { cache } from "hono/cache";
 import { HTTPException } from "hono/http-exception";
 
 type SongWhipResp = {
@@ -26,6 +27,13 @@ app.get(
         ? origin
         : undefined,
     allowMethods: ["GET"],
+  })
+);
+
+app.get(
+  "*",
+  cache({
+    cacheName: "cache",
   })
 );
 
