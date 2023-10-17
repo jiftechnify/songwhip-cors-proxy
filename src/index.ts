@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { cache } from "hono/cache";
+import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 
 type SongWhipResp = {
@@ -23,7 +23,7 @@ app.get(
   "*",
   cors({
     origin: (origin) =>
-      origin.startsWith("https://nostatus") && origin.endsWith(".vercel.app")
+      origin.startsWith("https://nostatus") && origin.endsWith(".vercel.app") || origin.includes("localhost:")
         ? origin
         : undefined,
     allowMethods: ["GET"],
